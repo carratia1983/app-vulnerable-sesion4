@@ -25,3 +25,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    
+    sca:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Escaneo de dependencias con Snyk
+        uses: snyk/actions/python@master
+        continue-on-error: true # Mantiene el pipeline en verde para el laboratorio
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
